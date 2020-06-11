@@ -1,14 +1,11 @@
 #### 抽象工厂模式
 
-抽象工厂模式:工厂方法模式对于同一类的对象进行构建，当我们想要对
-**一组**对象进行管理构建时，为了更好地扩展，我们就需要用到了抽象
-工厂模式
-比如 沿用工厂模式的类。暴发户为了掩饰身份，
+抽象工厂模式:工厂方法模式对于同一类的对象进行构建，当我们想要对**一组**对象进行管理构建时，为了更好地扩展，我们就需要用到了抽象工厂模式
+比如 沿用工厂方法模式的类。暴发户为了掩饰身份，
 - 开会的时候需要开奔驰、携带公文包
 - 出门旅游的时候开宝马车、携带生活衣服。
 
-出门的时候管家根据暴发户给的钥匙去准备相关的东西，我们把公文
-包、衣服等统称为必需品(Essential)，我们建立EssenTial抽象类
+出门的时候管家根据暴发户给的钥匙去准备相关的东西，我们把公文包、衣服等统称为必需品(Essential)，我们建立EssenTial抽象类
 ```java
 
 public interface  Essential {
@@ -112,8 +109,7 @@ public enum Factory {
 }
 
 ```
-给管家钥匙进行测试  
-
+给管家钥匙进行测试
 ```java
 AbstractFactory abstractFactory = Factory.INSTANCE.getFactory(DriveKey.BMW);
 Car car = abstractFactory.prepareCar();
@@ -162,14 +158,13 @@ case AUDI:
     break;
 
 ```
-暴发户给到管家奥迪的车钥匙，管家心情澎湃，希望暴发户今天不要回来了。  
-
+暴发户给到管家奥迪的车钥匙，管家心情澎湃，希望暴发户今天不要回来了。
 ```java
 AbstractFactory abstractFactory = Factory.INSTANCE.getFactory(DriveKey.AUDI);
 Car car = abstractFactory.prepareCar();
 Essential essential = abstractFactory.prepareEssential();
 essential.print();
-car.drive();  
+car.drive();
 ```
 ```log
 
@@ -177,16 +172,11 @@ car.drive();
 身份证已准备好，祝老板成功！
 奥迪车开始走了
 ```
-当看到正好有三辆车都实现了一遍。如果说我想回老家需要怎么解决呢？
 
-本章节是着重写抽象工厂的例子。上面的封装的DriveKey 是跟着车来的，
-再一个这个工厂方法也可以不需要 。比如我们可以直接`   AbstractFactory abstractFactory
- = new MeetingFactory();`来获取我们想要的对象。当然你可以根据
- 这组事件来做区分。
+###### 当看到正好有三辆车都实现了一遍。如果说我想回老家需要怎么解决呢？
+
+本章节是着重写抽象工厂的例子。上面的封装的DriveKey 是跟着车来的，再一个这个工厂方法也可以不需要 。比如我们可以直接`   AbstractFactory abstractFactory = new MeetingFactory();`来获取我们想要的对象。当然你可以根据这组事件来做区分。
 
  #### 抽象工厂模式vs工厂方法模式
 
- 根据上面的例子我们可以得出结论，工厂方法模式在扩展某个类型时很方便
- 比如说我们新建的约会的对象，还可以扩展其他类。抽象工厂则不然，我们
- 在抽象工厂中新加一个事件(就是说在准备必须品和车的时候再加一个事件)，
- 在实现的具体工厂里面要重新实现一遍。
+ 根据上面的例子我们可以得出结论，工厂方法模式在扩展某个类型时很方便比如说我们新建的约会的对象，还可以扩展其他类。抽象工厂则不然，我们在抽象工厂中新加一个事件(就是说在准备必须品和车的时候再加一个事件)，在实现的具体工厂里面要重新实现一遍。
